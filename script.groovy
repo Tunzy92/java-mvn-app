@@ -8,6 +8,7 @@ def buildImage() {
     sh 'docker build . -t tunzy/demo-image:1'
     sh "echo $PASS | docker login -u $USER --password-stdin"
     sh 'docker push tunzy/demo-image:1'
+    }
 }
 
 return this 
