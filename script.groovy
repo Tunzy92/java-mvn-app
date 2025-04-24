@@ -11,3 +11,4 @@ def buildImage() {
         sh 'docker push tunzy/demo-image:1.1'
     }
 }
+return this
