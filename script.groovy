@@ -1,12 +1,13 @@
-def buildApp() {
-    echo "Building the application..."
-}
-
 def testApp() {
-    echo "Testing the application..."
+    echo "testing the application..."
+    sh 'mvn package'
 }
-def deployApp() {
-    echo "Deploying the application..."
+def buildApp() {
+    echo "building docker image..."
+    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+    sh 'docker build . -t tunzy/demo-image:1'
+    sh "echo $PASS | docker login -u $USER --password-stdin"
+    sh 'docker push tunzy/demo-image:1'
 }
 
-return this
+return this 
