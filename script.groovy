@@ -1,8 +1,8 @@
-def testApp() {
+def buildJar() {
     echo "testing the application..."
     sh 'mvn package'
 }
-def buildApp() {
+def buildImage() {
     echo "building docker image..."
     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
     sh 'docker build . -t tunzy/demo-image:1'
