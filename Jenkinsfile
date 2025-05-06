@@ -1,5 +1,3 @@
-def gv
-
 pipeline {
     agent any
     tools {
@@ -17,6 +15,10 @@ pipeline {
             steps {
                 script {
                     gv.buildJar()
+        stage("build jar") {
+            steps {
+                script {
+                    echo "building the jar"
                 }
             }
         }

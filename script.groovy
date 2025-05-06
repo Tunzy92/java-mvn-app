@@ -11,4 +11,8 @@ def buildImage() {
         sh 'docker push tunzy/demo-image:1.1'
     }
 }
+
+def deployApp() {
+    echo 'deploying the application...'
+} 
 return this
