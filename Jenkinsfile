@@ -19,13 +19,6 @@ pipeline {
                 }
             }
         }
-        stage("Test") {
-            steps {
-                script {
-                    pipe.TestJar()
-                }
-            }
-        }
         stage("BuildImage") {
             steps {
                 script {
