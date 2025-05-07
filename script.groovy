@@ -10,9 +10,9 @@ def TestJar() {
 def BuildImage() {
     echo "Building the application..."
     withCredentials([usernamePassword(credentialsId: "dockerhub", passwordVariable: PASS, usernameVariable: USER)]) {
-    sh 'docker build . -t tunzy/demo-image:1.0'
-    sh "echo $PASS | docker login -u $USER --password-stdin"
-    sh 'docker push tunzy/demo-image:1.0'
+        sh 'docker build . -t tunzy/demo-image:1.0'
+        sh "echo $PASS | docker login -u $USER --password-stdin"
+        sh 'docker push tunzy/demo-image:1.0'
     }
 }
 def DeployJar() {
