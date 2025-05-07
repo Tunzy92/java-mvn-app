@@ -1,35 +1,33 @@
-def pipe
 pipeline {
     agent any
     tools {
         maven "Maven"
     }
     stages {
-        stage("Init") {
-            steps {
-                script {
-                    pipe = load "script.groovy"      
-                }
-            }
-        }
         stage("Build Jar") {
             steps {
                 script {
-                   pipe.BuildJar()
+                   sh 'echo Building the application...'
+                   sh 'mvn package'
                 }
             }
         }
         stage("BuildImage") {
             steps {
                 script {
-                     pipe.BuildImage()
+                     echo "Building the application..."
+                     withCredentials([usernamePassword(credentialsId: "dockerhub", passwordVariable: PASS, usernameVariable: USER)]) {
+                        sh 'docker build -t tunzy/demo-image:1.0 .'
+                        sh "echo $PASS | docker login -u $USER --password-stdin"
+                        sh 'docker push tunzy/demo-image:1.0'
+                    }
                 }
             }
         }
         stage("Deploy") {
             steps {
                 script {
-                    pipe.DeployJar()
+                    echo "deploying the application..."
                 }
             }
         }
