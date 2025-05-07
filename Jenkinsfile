@@ -12,7 +12,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    echo "Building the docker image..."
+                     echo "Building the docker image..."
                      withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh 'docker build -t tunzy/demo-image:1.0 .'
                         sh "echo $PASS | docker login -u $USER --password-stdin"
