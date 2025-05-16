@@ -1,39 +1,38 @@
+@Library("jenkins-shared-librart")
 def gv
-
-pipeline {
+pipeline (
     agent any
     tools {
         maven "Maven"
     }
     stages {
-        stage("Init") {
+         stage("Init") {
             steps {
                 script {
                     gv = load "script.groovy"
                 }
             }
         }
-        
-        stage("Build Jar") {
+        stage("Build") {
             steps {
                 script {
-                    gv.buildJar()
+                    buildJar()
                 }
             }
         }
-        stage("Build image") {
+         stage("Test") {
             steps {
                 script {
-                     gv.buildImage()
+                    testJar()
                 }
             }
         }
-        stage("Deploy Jar") {
+         stage("Deploy") {
             steps {
                 script {
-                    gv.deployJar()
+                    gv.deployApp
                 }
             }
         }
     }
-}
+)
