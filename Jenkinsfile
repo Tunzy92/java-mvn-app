@@ -2,7 +2,7 @@
 
 @Library("jenkins-shared-library")
 def gv
-pipeline (
+pipeline {
     agent any
     tools {
         maven "Maven"
@@ -37,4 +37,4 @@ pipeline (
             }
         }
     }
-)
+}
